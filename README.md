@@ -9,10 +9,9 @@ Then, put `genSidebar.mjs` in a folder which contain Hexo markdown files. run `n
 Last, to prevent Front-Matter rendered in the page, you need to add a hook to docsify  :
 
 ``` js
-let reg = /^---[\r\n](.|[\r\n])*[\r\n]---[\r\n]/;
+const reg = /^---[\r\n](.|[\r\n])*[\r\n]---[\r\n]/;
 hook.beforeEach(function(content) {
-    con = content.replace(reg, '')
-    return con;
+    return content.replace(reg, '');
 });
 ```
 
@@ -24,10 +23,9 @@ your script in `index.html` should like this:
         loadSidebar: true,
         plugins: [
             function(hook) {
-                let reg = /^---[\r\n](.|[\r\n])*[\r\n]---[\r\n]/;
+                const reg = /^---[\r\n](.|[\r\n])*[\r\n]---[\r\n]/;
                 hook.beforeEach(function(content) {
-                    con = content.replace(reg, '')
-                    return con;
+                    return content.replace(reg, '');
                 });
             }
         ]
