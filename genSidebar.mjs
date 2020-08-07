@@ -5,6 +5,7 @@ const infoRe = /^---[\r\n](.|[\r\n])*[\r\n]---[\r\n]/;
 const titleRe = /title:\s?(.*)/;
 const categoryRe = /categories:\s?[\r\n]+\s+-\s(.*)/;
 const dateRe = /date:\s?(.*)/;
+const perfix = '';
 
 let catalog = new Map();
 
@@ -49,7 +50,7 @@ function writeSidebar() {
     catalog.forEach((value, key) => {
         string = string.concat(`* ${key}\n\n`);
         value.forEach((v, k) => {
-            string = string.concat(`  * [${k}](${v})\n`);
+            string = string.concat(`  * [${k}](${perfix ? perfix + '/' : ''}${v})\n`);
         });
         string = string.concat('\n');
     })
@@ -62,7 +63,7 @@ function sortMap(map) {
     return mapAsc;
 }
 
-export async function docsifyGenSidebar(path='.') {
+export async function docsifyGenSidebar(path = '.') {
     await walkPath(path);
     catalog = sortMap(catalog)
     writeSidebar();
